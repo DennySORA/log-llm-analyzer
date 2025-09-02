@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Python project called "log-llm-analyzer" that appears to be in early development stages. The project uses modern Python tooling with `uv` as the package manager and requires Python 3.13+.
+This is a Python project called "log-llm-analyzer" focused on log analysis using LLMs. The project uses modern Python tooling with `uv` as the package manager, requires Python 3.13+, and includes the Claude Code SDK for AI-powered development workflows.
 
 ## Development Environment
 
@@ -14,15 +14,25 @@ This is a Python project called "log-llm-analyzer" that appears to be in early d
 - **Lock File**: `uv.lock` contains dependency specifications
 
 ### Project Structure
-- `main.py`: Entry point with basic "Hello World" functionality
+- `src/log-llm-analyzer/`: Main package directory
+  - `main.py`: Entry point with basic "Hello World" functionality
+  - `py.typed`: Indicates type hint support for the package
 - `doc/`: Contains Claude Code Python SDK documentation
-- `pyproject.toml`: Project configuration and dependencies
+- `pyproject.toml`: Comprehensive project configuration with dependencies and tooling setup
+- `LICENSE`: MIT License file
+- `README.md`: Project documentation
+- `CLAUDE.md`: Development guidance for Claude Code
 
 ## Common Commands
 
 ### Running the Application
 ```bash
-python main.py
+# Run with uv (recommended)
+uv run python src/log-llm-analyzer/main.py
+
+# Or activate virtual environment and run
+source .venv/bin/activate
+python src/log-llm-analyzer/main.py
 ```
 
 ### Package Management
@@ -42,8 +52,11 @@ uv lock --upgrade
 # Activate virtual environment (if using uv's built-in venv)
 source .venv/bin/activate
 
-# Run Python with uv
-uv run python main.py
+# Run Python with uv (recommended)
+uv run python src/log-llm-analyzer/main.py
+
+# Install development dependencies
+uv sync
 ```
 
 ## Core Development Rules
@@ -77,21 +90,42 @@ uv run python main.py
    ```
    Code is not considered complete until all these checks pass.
 
+## Dependencies & Tools
+
+### Core Dependencies
+- **claude-code-sdk>=0.0.20**: Claude Code SDK for AI-powered development
+- **pydantic>=2.11.7**: Data validation and settings management
+- **pydantic-settings>=2.10.1**: Configuration management
+
+### Development Tools
+- **ruff>=0.12.11**: Fast Python linter and formatter (replaces flake8, isort, etc.)
+- **mypy>=1.17.1**: Static type checker with strict configuration
+- **bandit[toml]>=1.8.6**: Security-focused static analysis
+
+### Build System
+- **hatchling**: Modern Python build backend
+- Configured for `src/` layout with proper package structure
+
 ## Development Notes
 
-- The project is currently in a minimal state with just a basic main.py file
-- Comprehensive linting, formatting, and type checking tools are configured in pyproject.toml
-- The `doc/claude-sdk.md` file contains comprehensive documentation for integrating Claude Code Python SDK, which may be relevant for future development
+- Project follows `src/` layout structure with proper Python packaging
+- Comprehensive tooling configuration in pyproject.toml with strict quality standards
+- Type hints are fully supported with `py.typed` marker file
+- The `doc/claude-sdk.md` file contains comprehensive documentation for integrating Claude Code Python SDK
 
 ## Architecture
 
-The current architecture is minimal:
-- Single entry point in `main.py`
-- No established patterns or modules yet
-- Ready for expansion based on log analysis requirements
+The project follows Python packaging best practices:
+- **Package Structure**: `src/log-llm-analyzer/` layout for clean separation
+- **Entry Point**: `src/log-llm-analyzer/main.py` with basic functionality
+- **Type Safety**: Full type hint support with `py.typed` marker
+- **Build System**: Modern hatchling-based build configuration
 
-Since this project appears to be focused on log analysis with LLMs, future development will likely involve:
-- Log parsing and processing modules
-- LLM integration for analysis
-- Data structures for representing log insights
-- Potentially CLI interfaces for log analysis workflows
+### Planned Architecture
+As a log analysis tool with LLM integration, the architecture will likely expand to include:
+- **Log Processing**: Parsers for various log formats
+- **LLM Integration**: Claude Code SDK integration for intelligent analysis
+- **Data Models**: Pydantic models for log structures and analysis results
+- **Configuration**: Pydantic Settings for application configuration
+- **CLI Interface**: Command-line tools for log analysis workflows
+- **Security**: Bandit-compliant secure coding practices
